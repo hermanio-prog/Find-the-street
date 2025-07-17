@@ -1,617 +1,217 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find the Hole</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: url('fundo.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #0a0a0a;
-        }
-        
-        .container {
-            background-color: rgba(10, 10, 10, 0.85);
-            padding: 30px;
-            border-radius: 16px;
-            width: 85%;
-            max-width: 420px;
-            text-align: center;
-            margin: 15px auto;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-        }
-        
-        .menu-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            width: auto;
-            padding: 5px;
-            z-index: 1000;
-        }
-
-        .menu-content {
-            display: none;
-            position: fixed;
-            top: 55px;
-            left: 15px;
-            background-color: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1000;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .menu-content a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            text-align: left;
-        }
-
-        .menu-content a:hover {
-            background-color: rgba(76, 175, 80, 0.5);
-        }
-
-        .show {
-            display: block;
-        }
-        
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.4rem;
-            margin-bottom: 5px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #fff;
-            text-transform: uppercase;
-            line-height: 1.1;
-        }
-        
-        .logo-subtext {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            margin-bottom: 25px;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
-            text-transform: uppercase;
-        }
-        
-        p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.85);
-            padding: 0 10px;
-            text-align: left;
-        }
-        
-        .highlight {
-            font-weight: 600;
-            color: #4CAF50;
-        }
-        
-        button {
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            margin: 12px 0;
-            cursor: pointer;
-            border-radius: 50px;
-            width: 100%;
-            max-width: 280px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        button:hover {
-            background: linear-gradient(135deg, #43A047, #1B5E20);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
-        }
-        
-        button:active {
-            transform: translateY(1px);
-        }
-        
-        .options {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            font-weight: 800;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.9);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            resize: none;
-            min-height: 120px;
-        }
-
-        .back-btn {
-            background: linear-gradient(135deg, #6c757d, #495057);
-            margin-top: 10px;
-        }
-
-        .back-btn:hover {
-            background: linear-gradient(135deg, #5a6268, #343a40);
-        }
-
-        .thank-you-message {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #4CAF50;
-            margin: 20px 0;
-        }
-
-        .team-list {
-            text-align: left;
-            margin-left: 20px;
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .container {
-                padding: 25px 20px;
-                width: 90%;
-            }
-            p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de Navegação</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    .screen {
+      display: none;
+      padding: 20px;
+    }
+    #welcome-screen {
+      display: block;
+      text-align: center;
+      padding-top: 100px;
+    }
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .menu-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #222;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .menu-bar button {
+      background-color: #444;
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+    .menu-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .menu-content.show {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <!-- Tela inicial -->
-    <div class="container" id="welcome-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h1>FIND THE HOLE</h1>
-        <div class="logo-subtext">NAVEGAÇÃO INTELIGENTE</div>
-        <p>Transformamos sua experiência de direção com <span class="highlight">tecnologia avançada</span> para identificar e reportar buracos, sugerindo as <span class="highlight">rotas mais seguras</span> em tempo real.</p>
-        <button onclick="showQuestion()">COMEÇAR</button>
-    </div>
-    
-    <!-- Tela de localização -->
-    <div class="container options" id="location-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent2">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>SUA LOCALIZAÇÃO</h2>
-        <button onclick="selectLocation('Maputo')">MAPUTO</button>
-        <button onclick="selectLocation('Gaza')">GAZA</button>
-        <button onclick="selectLocation('Inhambane')">INHAMBANE</button>
-        <button onclick="selectLocation('Outros')">OUTRAS REGIÕES</button>
-    </div>
-    
-    <!-- Tela de opções principais -->
-    <div class="container options" id="options-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent3">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>OPÇÕES</h2>
-        <button onclick="showReportProblem()">REPORTAR PROBLEMA</button>
-        <button onclick="showAlternativeRoutes()">ROTAS ALTERNATIVAS</button>
-        <button onclick="openSafeRoutes()">VIAS SEGURAS</button>
-        <button onclick="showInfo()">SAIBA MAIS</button>
-    </div>
-    
-    <!-- Tela de reportar problema -->
-    <div class="container options" id="report-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent4">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>REPORTAR PROBLEMA</h2>
-        <p>Descreva o problema encontrado na via:</p>
-        <textarea id="problem-description" placeholder="Ex: Buraco grande na Avenida 24 de Julho, próximo ao semáforo..."></textarea>
-        <button onclick="submitProblem()">ENVIAR RELATO</button>
-        <button class="back-btn" onclick="backToOptions()">VOLTAR</button>
-    </div>
-    
-    <!-- Tela de confirmação -->
-    <div class="container options" id="thank-you-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent5">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>OBRIGADO!</h2>
-        <p class="thank-you-message">Seu relato foi enviado com sucesso!</p>
-        <p>Agradecemos por contribuir para estradas mais seguras.</p>
-        <button onclick="backToOptions()">VOLTAR AO INÍCIO</button>
-    </div>
-    
-    <!-- Tela de rotas alternativas -->
-    <div class="container options" id="routes-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent6">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>ROTAS ALTERNATIVAS</h2>
-        <button onclick="showRouteOptions('fastest')">CAMINHOS RÁPIDOS</button>
-        <button onclick="showRouteOptions('no_traffic')">SEM CONGESTIONAMENTOS</button>
-        <button onclick="showRouteOptions('urban')">RUAS URBANAS</button>
-        <button class="back-btn" onclick="backToOptions()">VOLTAR</button>
-    </div>
-    
-    <!-- Tela Sobre Nós -->
-    <div class="container options" id="about-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent7">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>SOBRE NÓS</h2>
-        <p><strong>2. Sistema "Find Your Hole" (Encontre seu buraco)</strong></p>
-        <p>Esse sistema permite que os cidadãos reportem buracos nas estradas. A informação vai para um <strong>Centro de Atendimento</strong>, que envia uma equipa para reparar o problema antes que o buraco se torne uma cratera.</p>
-        <p>Esse centro também serve para denúncias de:</p>
-        <ul class="team-list">
-            <li>Acidentes de viação</li>
-            <li>Suborno e corrupção nas estradas</li>
-            <li>Raptos</li>
-            <li>Situação do trânsito</li>
-            <li>Outras irregularidades rodoviárias</li>
-        </ul>
-        <p>O sistema será financiado pelas portagens da cidade, e ainda vai criar <strong>empregos diretos e indiretos</strong> para muitos jovens.</p>
-        <p>O sistema foi desenvolvido para facilitar a vida dos moçambicanos nas estradas</p>
-        
-        <p><strong>Sistema desenvolvido por:</strong></p>
-        <ul class="team-list">
-            <li>Hermanio Cuamba (engenheiro de software e estudante da 12°)</li>
-            <li>Arlindo Chantel (criador e estudante da 12°)</li>
-            <li>Klinton Juvêncio (colaborador e estudante)</li>
-            <li>Anis de Lacerda (colaborador e estudante)</li>
-            <li>Everton (Auxiliar do engenheiro de software e estudante)</li>
-        </ul>
-        <button class="back-btn" onclick="backToPreviousScreen()">VOLTAR</button>
-    </div>
-    
-    <!-- Tela de Ajuda -->
-    <div class="container options" id="help-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent8">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>AJUDA</h2>
-        <p><strong>Como reportar um problema:</strong></p>
-        <p>1. Selecione sua localização</p>
-        <p>2. Escolha "Reportar problema"</p>
-        <p>3. Descreva o problema em detalhes</p>
-        <p>4. Clique em "Enviar relato"</p>
-        
-        <p><strong>Como usar rotas alternativas:</strong></p>
-        <p>1. Selecione sua localização</p>
-        <p>2. Escolha "Rotas alternativas"</p>
-        <p>3. Selecione o tipo de rota desejada</p>
-        <p>4. O Google Maps abrirá com a rota otimizada</p>
-        
-        <p><strong>Dúvidas frequentes:</strong></p>
-        <p>Q: Quanto tempo leva para consertar um buraco reportado?</p>
-        <p>R: Depende da gravidade, mas geralmente em até 72 horas.</p>
-        <button class="back-btn" onclick="backToPreviousScreen()">VOLTAR</button>
-    </div>
-    
-    <!-- Tela de Informações (Saiba Mais) -->
-    <div class="container options" id="info-screen">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent9">
-            <a href="#" onclick="goHome()">Home</a>
-            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
-            <a href="#" onclick="showHelp()">Ajuda</a>
-            <a href="#" onclick="showInfo()">Informações</a>
-        </div>
-        <h2>INFORMAÇÕES</h2>
-        <p><strong>Sistema "Find Your Hole"</strong></p>
-        <p>Plataforma digital para reporte de problemas nas estradas, desenvolvida por estudantes moçambicanos com o objetivo de melhorar a mobilidade urbana.</p>
-        
-        <p><strong>Funcionalidades:</strong></p>
-        <ul class="team-list">
-            <li>Reporte de buracos e problemas nas vias</li>
-            <li>Sugestão de rotas alternativas inteligentes</li>
-            <li>Informações sobre vias seguras</li>
-            <li>Canal de denúncias de irregularidades</li>
-            <li>Integração com Google Maps para navegação</li>
-        </ul>
-        
-        <p><strong>Equipe de desenvolvimento:</strong></p>
-        <ul class="team-list">
-            <li>Hermanio Cuamba</li>
-            <li>Arlindo Chantel</li>
-            <li>Klinton Juvêncio</li>
-            <li>Anis de Lacerda</li>
-            <li>Everton</li>
-        </ul>
-        
-        <p>Financiado pelas portagens da cidade de Maputo.</p>
-        <button class="back-btn" onclick="backToPreviousScreen()">VOLTAR</button>
-    </div>
-    
-    <script>
-        // Variáveis globais
-        let previousScreen = '';
-        let selectedLocation = 'Maputo'; // Valor padrão
-        
-        // Funções de navegação básica
-        function showQuestion() {
-            hideAllScreens();
-            document.getElementById('location-screen').style.display = 'block';
-        }
-        
-        function selectLocation(location) {
-            selectedLocation = location;
-            localStorage.setItem('selectedLocation', location);
-            showOptions();
-        }
-        
-        function showOptions() {
-            hideAllScreens();
-            document.getElementById('options-screen').style.display = 'block';
-        }
-        
-        function backToOptions() {
-            hideAllScreens();
-            document.getElementById('options-screen').style.display = 'block';
-        }
-        
-        // Funções para reportar problema
-        function showReportProblem() {
-            setPreviousScreen('options-screen');
-            hideAllScreens();
-            document.getElementById('report-screen').style.display = 'block';
-        }
-        
-        function submitProblem() {
-            const description = document.getElementById('problem-description').value;
-            if (description.trim() === '') {
-                alert('Por favor, descreva o problema antes de enviar.');
-                return;
-            }
-            
-            // Aqui você normalmente enviaria os dados para um servidor
-            console.log('Problema reportado:', {
-                location: selectedLocation,
-                description: description,
-                date: new Date().toISOString()
-            });
-            
-            hideAllScreens();
-            document.getElementById('thank-you-screen').style.display = 'block';
-            document.getElementById('problem-description').value = ''; // Limpa o campo
-        }
-        
-        // Funções para rotas alternativas
-        function showAlternativeRoutes() {
-            setPreviousScreen('options-screen');
-            hideAllScreens();
-            document.getElementById('routes-screen').style.display = 'block';
-        }
-        
-        function showRouteOptions(routeType) {
-            let mapsUrl = 'https://www.google.com/maps/dir/?api=1';
-            
-            // Configura parâmetros baseados no tipo de rota
-            switch(routeType) {
-                case 'fastest':
-                    mapsUrl += '&travelmode=driving&avoid=tolls|ferries';
-                    break;
-                case 'no_traffic':
-                    mapsUrl += '&travelmode=driving&departure_time=now&traffic_model=best_guess';
-                    break;
-                case 'urban':
-                    mapsUrl += '&travelmode=driving&avoid=highways';
-                    break;
-            }
-            
-            // Adiciona destino baseado na localização selecionada
-            switch(selectedLocation) {
-                case 'Maputo':
-                    mapsUrl += '&destination=Maputo,+Moçambique';
-                    break;
-                case 'Gaza':
-                    mapsUrl += '&destination=Gaza,+Moçambique';
-                    break;
-                case 'Inhambane':
-                    mapsUrl += '&destination=Inhambane,+Moçambique';
-                    break;
-                default:
-                    mapsUrl += '&destination=Moçambique';
-            }
-            
-            // Abre o Google Maps em nova aba
-            window.open(mapsUrl, '_blank');
-        }
-        
-        // Função para abrir vias seguras
-        function openSafeRoutes() {
-            let mapsUrl = 'https://www.google.com/maps/search/';
-            
-            switch(selectedLocation) {
-                case 'Maputo':
-                    mapsUrl += 'rotas+seguras+Maputo';
-                    break;
-                case 'Gaza':
-                    mapsUrl += 'rotas+seguras+Gaza+Moçambique';
-                    break;
-                case 'Inhambane':
-                    mapsUrl += 'rotas+seguras+Inhambane';
-                    break;
-                default:
-                    mapsUrl += 'estradas+seguras+Moçambique';
-            }
-            
-            window.open(mapsUrl, '_blank');
-        }
-        
-        // Funções do menu
-        function toggleMenu() {
-            event.stopPropagation();
-            const menuId = event.target.nextElementSibling.id;
-            const menu = document.getElementById(menuId);
-            menu.classList.toggle('show');
-        }
-        
-        // Fecha os menus quando clicar em qualquer lugar
-        window.onclick = function() {
-            const menus = document.querySelectorAll('.menu-content');
-            menus.forEach(menu => {
-                if (menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                }
-            });
-        }
-        
-        function goHome() {
-            hideAllScreens();
-            document.getElementById('welcome-screen').style.display = 'block';
-            closeAllMenus();
-        }
-        
-        function showAboutUs() {
-            setPreviousScreen();
-            hideAllScreens();
-            document.getElementById('about-screen').style.display = 'block';
-            closeAllMenus();
-        }
-        
-        function showHelp() {
-            setPreviousScreen();
-            hideAllScreens();
-            document.getElementById('help-screen').style.display = 'block';
-            closeAllMenus();
-        }
-        
-        function showInfo() {
-            setPreviousScreen();
-            hideAllScreens();
-            document.getElementById('info-screen').style.display = 'block';
-            closeAllMenus();
-        }
-        
-        function backToPreviousScreen() {
-            if (previousScreen) {
-                hideAllScreens();
-                document.getElementById(previousScreen).style.display = 'block';
-            } else {
-                backToOptions();
-            }
-        }
-        
-        function setPreviousScreen(screen = '') {
-            // Determina a tela atual para poder voltar
-            const currentScreen = document.querySelector('.options[style="display: block;"]') || 
-                                document.getElementById('welcome-screen');
-            if (screen) {
-                previousScreen = screen;
-            } else if (currentScreen) {
-                previousScreen = currentScreen.id;
-            } else {
-                previousScreen = 'options-screen';
-            }
-        }
-        
-        // Função utilitária para esconder todas as telas
-        function hideAllScreens() {
-            const screens = document.querySelectorAll('.options, #welcome-screen');
-            screens.forEach(screen => {
-                screen.style.display = 'none';
-            });
-        }
-        
-        function closeAllMenus() {
-            const menus = document.querySelectorAll('.menu-content');
-            menus.forEach(menu => {
-                menu.classList.remove('show');
-            });
-        }
-        
-        // Carrega a localização salva ao iniciar
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLocation = localStorage.getItem('selectedLocation');
-            if (savedLocation) {
-                selectedLocation = savedLocation;
-            }
-        });
-    </script>
+
+<div id="welcome-screen" class="screen">
+  <h1>Bem-vindo ao Sistema de Navegação</h1>
+  <button onclick="showQuestion()">Iniciar</button>
+</div>
+
+<div id="location-screen" class="screen">
+  <h2>Escolha a Sua Localização</h2>
+  <button onclick="selectLocation('Maputo')">Maputo</button>
+  <button onclick="selectLocation('Gaza')">Gaza</button>
+  <button onclick="selectLocation('Inhambane')">Inhambane</button>
+</div>
+
+<div id="options-screen" class="screen">
+  <h2>O que pretende fazer?</h2>
+  <button onclick="showAlternativeRoutes()">Rotas Alternativas</button>
+  <button onclick="openSafeRoutes()">Vias Seguras</button>
+  <button onclick="showReportProblem()">Reportar Problema</button>
+</div>
+
+<div id="routes-screen" class="screen">
+  <h2>Escolha o tipo de rota</h2>
+  <button onclick="showRouteOptions('fastest')">Caminhos Rápidos</button>
+  <button onclick="showRouteOptions('no_traffic')">Sem Congestionamento</button>
+  <button onclick="showRouteOptions('urban')">Ruas Urbanas</button>
+  <button onclick="backToOptions()">Voltar</button>
+</div>
+
+<div id="report-screen" class="screen">
+  <h2>Descreva o problema encontrado</h2>
+  <textarea id="problem-description" rows="5" style="width: 100%;"></textarea>
+  <button onclick="submitProblem()">Submeter</button>
+</div>
+
+<div id="thank-you-screen" class="screen">
+  <h2>Obrigado por reportar o problema!</h2>
+  <button onclick="goHome()">Voltar ao Início</button>
+</div>
+
+<!-- Menu inferior fixo -->
+<div class="menu-bar">
+  <button onclick="goHome()">Início</button>
+  <button onclick="showAlternativeRoutes()">Rotas</button>
+  <button onclick="openSafeRoutes()">Vias Seguras</button>
+  <button onclick="showReportProblem()">Reportar</button>
+</div>
+
+<script>
+  let previousScreen = '';
+  let selectedLocation = 'Maputo';
+
+  function hideAllScreens() {
+    document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  }
+
+  function showQuestion() {
+    hideAllScreens();
+    document.getElementById('location-screen').style.display = 'block';
+  }
+
+  function selectLocation(location) {
+    selectedLocation = location;
+    localStorage.setItem('selectedLocation', location);
+    showOptions();
+  }
+
+  function showOptions() {
+    hideAllScreens();
+    document.getElementById('options-screen').style.display = 'block';
+  }
+
+  function showAlternativeRoutes() {
+    previousScreen = 'options-screen';
+    hideAllScreens();
+    document.getElementById('routes-screen').style.display = 'block';
+  }
+
+  function openSafeRoutes() {
+    previousScreen = 'options-screen';
+    hideAllScreens();
+    document.getElementById('routes-screen').style.display = 'block';
+    let mapsUrl = 'https://www.google.com/maps/search/';
+
+    switch(selectedLocation) {
+      case 'Maputo':
+        mapsUrl += 'Hospital+Central+de+Bagamoio,+Maputo';
+        break;
+      case 'Gaza':
+        mapsUrl += 'estradas+seguras+Gaza+Moçambique';
+        break;
+      case 'Inhambane':
+        mapsUrl += 'estradas+seguras+Inhambane';
+        break;
+      default:
+        mapsUrl += 'estradas+seguras+Moçambique';
+    }
+
+    window.open(mapsUrl, '_blank');
+  }
+
+  function showRouteOptions(routeType) {
+    let mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=Hospital+Central+de+Bagamoio,+Maputo';
+
+    switch(routeType) {
+      case 'fastest':
+        mapsUrl += '&travelmode=driving&avoid=tolls|ferries';
+        break;
+      case 'no_traffic':
+        mapsUrl += '&travelmode=driving&departure_time=now&traffic_model=best_guess';
+        break;
+      case 'urban':
+        mapsUrl += '&travelmode=driving&avoid=highways';
+        break;
+    }
+
+    window.open(mapsUrl, '_blank');
+  }
+
+  function showReportProblem() {
+    previousScreen = 'options-screen';
+    hideAllScreens();
+    document.getElementById('report-screen').style.display = 'block';
+  }
+
+  function submitProblem() {
+    const description = document.getElementById('problem-description').value;
+    if (description.trim() === '') {
+      alert('Por favor, descreva o problema antes de enviar.');
+      return;
+    }
+
+    console.log('Problema:', {
+      localização: selectedLocation,
+      descrição: description,
+      data: new Date().toISOString()
+    });
+
+    hideAllScreens();
+    document.getElementById('thank-you-screen').style.display = 'block';
+    document.getElementById('problem-description').value = '';
+  }
+
+  function backToOptions() {
+    hideAllScreens();
+    document.getElementById('options-screen').style.display = 'block';
+  }
+
+  function goHome() {
+    hideAllScreens();
+    document.getElementById('welcome-screen').style.display = 'block';
+  }
+</script>
+
 </body>
-            </html>
+</html>
