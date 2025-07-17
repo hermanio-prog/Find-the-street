@@ -33,6 +33,7 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
+            position: relative;
         }
         
         h1 {
@@ -64,6 +65,7 @@
             font-weight: 400;
             color: rgba(255, 255, 255, 0.85);
             padding: 0 10px;
+            text-align: left;
         }
         
         .highlight {
@@ -150,6 +152,56 @@
             margin: 20px 0;
         }
 
+        /* Menu de três pontos */
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: auto;
+            padding: 5px;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .menu-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .menu-content a:hover {
+            background-color: rgba(76, 175, 80, 0.5);
+        }
+
+        .show {
+            display: block;
+        }
+
+        .team-list {
+            text-align: left;
+            margin-left: 20px;
+        }
+
         @media (max-width: 480px) {
             h1 {
                 font-size: 2rem;
@@ -167,6 +219,13 @@
 <body>
     <!-- Tela inicial -->
     <div class="container" id="welcome-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
         <h1>FIND THE HOLE</h1>
         <div class="logo-subtext">NAVEGAÇÃO INTELIGENTE</div>
         <p>Transformamos sua experiência de direção com <span class="highlight">tecnologia avançada</span> para identificar e reportar buracos, sugerindo as <span class="highlight">rotas mais seguras</span> em tempo real.</p>
@@ -175,6 +234,13 @@
     
     <!-- Tela de localização -->
     <div class="container options" id="location-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent2">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
         <h2>SUA LOCALIZAÇÃO</h2>
         <button onclick="showOptions('Maputo')">MAPUTO</button>
         <button onclick="showOptions('Gaza')">GAZA</button>
@@ -184,15 +250,29 @@
     
     <!-- Tela de opções principais -->
     <div class="container options" id="options-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent3">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
         <h2>OPÇÕES</h2>
         <button onclick="showReportProblem()">REPORTAR PROBLEMA</button>
         <button onclick="showAlternativeRoutes()">ROTAS ALTERNATIVAS</button>
         <button onclick="openGoogleMaps()">VIAS SEGURAS</button>
-        <button onclick="alert('Opção selecionada: Informações')">SAIBA MAIS</button>
+        <button onclick="showInfo()">SAIBA MAIS</button>
     </div>
     
     <!-- Tela de reportar problema -->
     <div class="container options" id="report-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent4">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
         <h2>REPORTAR PROBLEMA</h2>
         <p>Descreva o problema encontrado na via:</p>
         <textarea id="problem-description" placeholder="Ex: Buraco grande na Avenida 24 de Julho, próximo ao semáforo..."></textarea>
@@ -202,6 +282,13 @@
     
     <!-- Tela de confirmação -->
     <div class="container options" id="thank-you-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent5">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
         <h2>OBRIGADO!</h2>
         <p class="thank-you-message">Seu relato foi enviado com sucesso!</p>
         <p>Agradecemos por contribuir para estradas mais seguras.</p>
@@ -210,6 +297,13 @@
     
     <!-- Tela de rotas alternativas -->
     <div class="container options" id="routes-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent6">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
         <h2>ROTAS ALTERNATIVAS</h2>
         <button onclick="showUnderDevelopment()">CAMINHOS RÁPIDOS</button>
         <button onclick="showUnderDevelopment()">SEM CONGESTIONAMENTOS</button>
@@ -217,15 +311,108 @@
         <button class="back-btn" onclick="backToOptions()">VOLTAR</button>
     </div>
     
+    <!-- Tela Sobre Nós -->
+    <div class="container options" id="about-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent7">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
+        <h2>SOBRE NÓS</h2>
+        <p><strong>2. Sistema "Find Your Hole" (Encontre seu buraco)</strong></p>
+        <p>Esse sistema permite que os cidadãos reportem buracos nas estradas. A informação vai para um <strong>Centro de Atendimento</strong>, que envia uma equipa para reparar o problema antes que o buraco se torne uma cratera.</p>
+        <p>Esse centro também serve para denúncias de:</p>
+        <ul class="team-list">
+            <li>Acidentes de viação</li>
+            <li>Suborno e corrupção nas estradas</li>
+            <li>Raptos</li>
+            <li>Situação do trânsito</li>
+            <li>Outras irregularidades rodoviárias</li>
+        </ul>
+        <p>O sistema será financiado pelas portagens da cidade, e ainda vai criar <strong>empregos diretos e indiretos</strong> para muitos jovens.</p>
+        <p>O sistema foi desenvolvido para facilitar a vida dos moçambicanos nas estradas</p>
+        
+        <p><strong>Sistema desenvolvido por:</strong></p>
+        <ul class="team-list">
+            <li>Hermanio Cuamba (engenheiro de software e estudante da 12°)</li>
+            <li>Arlindo Chantel (criador e estudante da 12°)</li>
+            <li>Klinton Juvêncio (colaborador e estudante)</li>
+            <li>Anis de Lacerda (colaborador e estudante)</li>
+            <li>Everton (Auxiliar do engenheiro de software e estudante)</li>
+        </ul>
+        <button class="back-btn" onclick="backToPreviousScreen()">VOLTAR</button>
+    </div>
+    
+    <!-- Tela de Ajuda -->
+    <div class="container options" id="help-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent8">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
+        <h2>AJUDA</h2>
+        <p><strong>Como reportar um problema:</strong></p>
+        <p>1. Selecione sua localização</p>
+        <p>2. Escolha "Reportar problema"</p>
+        <p>3. Descreva o problema em detalhes</p>
+        <p>4. Clique em "Enviar relato"</p>
+        
+        <p><strong>Dúvidas frequentes:</strong></p>
+        <p>Q: Quanto tempo leva para consertar um buraco reportado?</p>
+        <p>R: Depende da gravidade, mas geralmente em até 72 horas.</p>
+        <button class="back-btn" onclick="backToPreviousScreen()">VOLTAR</button>
+    </div>
+    
+    <!-- Tela de Informações (Saiba Mais) -->
+    <div class="container options" id="info-screen">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent9">
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" onclick="showAboutUs()">Sobre Nós</a>
+            <a href="#" onclick="showHelp()">Ajuda</a>
+            <a href="#" onclick="showInfo()">Informações</a>
+        </div>
+        <h2>INFORMAÇÕES</h2>
+        <p><strong>Sistema "Find Your Hole"</strong></p>
+        <p>Plataforma digital para reporte de problemas nas estradas, desenvolvida por estudantes moçambicanos com o objetivo de melhorar a mobilidade urbana.</p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul class="team-list">
+            <li>Reporte de buracos e problemas nas vias</li>
+            <li>Sugestão de rotas alternativas</li>
+            <li>Informações sobre vias seguras</li>
+            <li>Canal de denúncias de irregularidades</li>
+        </ul>
+        
+        <p><strong>Equipe de desenvolvimento:</strong></p>
+        <ul class="team-list">
+            <li>Hermanio Cuamba</li>
+            <li>Arlindo Chantel</li>
+            <li>Klinton Juvêncio</li>
+            <li>Anis de Lacerda</li>
+            <li>Everton</li>
+        </ul>
+        
+        <p>Financiado pelas portagens da cidade de Maputo.</p>
+        <button class="back-btn" onclick="backToPreviousScreen()">VOLTAR</button>
+    </div>
+    
     <script>
+        // Variável para controlar a tela anterior
+        let previousScreen = '';
+        
         // Funções de navegação básica
         function showQuestion() {
-            document.getElementById('welcome-screen').style.display = 'none';
+            hideAllScreens();
             document.getElementById('location-screen').style.display = 'block';
         }
         
         function showOptions(location) {
-            document.getElementById('location-screen').style.display = 'none';
+            hideAllScreens();
             document.getElementById('options-screen').style.display = 'block';
         }
         
@@ -236,6 +423,7 @@
         
         // Funções para reportar problema
         function showReportProblem() {
+            setPreviousScreen('options-screen');
             hideAllScreens();
             document.getElementById('report-screen').style.display = 'block';
         }
@@ -257,6 +445,7 @@
         
         // Funções para rotas alternativas
         function showAlternativeRoutes() {
+            setPreviousScreen('options-screen');
             hideAllScreens();
             document.getElementById('routes-screen').style.display = 'block';
         }
@@ -271,6 +460,73 @@
             window.open('https://www.google.com/maps', '_blank');
         }
         
+        // Funções do menu
+        function toggleMenu() {
+            event.stopPropagation(); // Impede que o clique se propague
+            const menuId = event.target.nextElementSibling.id;
+            const menu = document.getElementById(menuId);
+            menu.classList.toggle('show');
+        }
+        
+        // Fecha os menus quando clicar em qualquer lugar
+        window.onclick = function() {
+            const menus = document.querySelectorAll('.menu-content');
+            menus.forEach(menu => {
+                if (menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                }
+            });
+        }
+        
+        function goHome() {
+            hideAllScreens();
+            document.getElementById('welcome-screen').style.display = 'block';
+            closeAllMenus();
+        }
+        
+        function showAboutUs() {
+            setPreviousScreen();
+            hideAllScreens();
+            document.getElementById('about-screen').style.display = 'block';
+            closeAllMenus();
+        }
+        
+        function showHelp() {
+            setPreviousScreen();
+            hideAllScreens();
+            document.getElementById('help-screen').style.display = 'block';
+            closeAllMenus();
+        }
+        
+        function showInfo() {
+            setPreviousScreen();
+            hideAllScreens();
+            document.getElementById('info-screen').style.display = 'block';
+            closeAllMenus();
+        }
+        
+        function backToPreviousScreen() {
+            if (previousScreen) {
+                hideAllScreens();
+                document.getElementById(previousScreen).style.display = 'block';
+            } else {
+                backToOptions();
+            }
+        }
+        
+        function setPreviousScreen(screen = '') {
+            // Determina a tela atual para poder voltar
+            const currentScreen = document.querySelector('.options[style="display: block;"]') || 
+                                document.getElementById('welcome-screen');
+            if (screen) {
+                previousScreen = screen;
+            } else if (currentScreen) {
+                previousScreen = currentScreen.id;
+            } else {
+                previousScreen = 'options-screen';
+            }
+        }
+        
         // Função utilitária para esconder todas as telas
         function hideAllScreens() {
             const screens = document.querySelectorAll('.options, #welcome-screen');
@@ -278,6 +534,13 @@
                 screen.style.display = 'none';
             });
         }
+        
+        function closeAllMenus() {
+            const menus = document.querySelectorAll('.menu-content');
+            menus.forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
     </script>
 </body>
-</html>
+                </html>
