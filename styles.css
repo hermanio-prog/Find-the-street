@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a0a0a;
+}
+
+.container {
+    background-color: rgba(10, 10, 10, 0.85);
+    padding: 30px;
+    border-radius: 16px;
+    width: 85%;
+    max-width: 420px;
+    text-align: center;
+    margin: 15px auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.menu-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    width: auto;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.menu-content {
+    display: none;
+    position: fixed;
+    top: 55px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.9);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* [Continue com todos os outros estilos do CSS original] *
