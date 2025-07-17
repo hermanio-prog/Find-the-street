@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Hole</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            text-align: center;
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 300px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .options {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .option-btn {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="welcome-screen">
+        <h1>Bem vindo!</h1>
+        <p>O Find the Hole é um aplicativo que ajuda os condutores a identificar e reportar buracos nas estradas, além de encontrar rotas alternativas mais seguras. Foi criado para melhorar a experiência de direção e segurança nas estradas.</p>
+        <button onclick="showQuestion()">Continuar</button>
+    </div>
+    
+    <div class="container options" id="location-screen">
+        <h2>Onde mora?</h2>
+        <button class="option-btn" onclick="showOptions('Maputo')">Maputo</button>
+        <button class="option-btn" onclick="showOptions('Gaza')">Gaza</button>
+        <button class="option-btn" onclick="showOptions('Inhambane')">Inhambane</button>
+        <button class="option-btn" onclick="showOptions('Outros')">Outros</button>
+    </div>
+    
+    <div class="container options" id="options-screen">
+        <h2>Escolha a alternativa</h2>
+        <button class="option-btn" onclick="alert('Opção selecionada: Relatar problemas')">Relatar problemas</button>
+        <button class="option-btn" onclick="alert('Opção selecionada: Procurar vias alternativas')">Procurar vias alternativas</button>
+        <button class="option-btn" onclick="alert('Opção selecionada: Indicar estradas seguras')">Indicar estradas seguras</button>
+        <button class="option-btn" onclick="alert('Opção selecionada: Lorem ipsum')">Lorem ipsum</button>
+    </div>
+    
+    <script>
+        function showQuestion() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('location-screen').style.display = 'block';
+        }
+        
+        function showOptions(location) {
+            document.getElementById('location-screen').style.display = 'none';
+            document.getElementById('options-screen').style.display = 'block';
+            alert('Localização selecionada: ' + location);
+        }
+    </script>
+</body>
+</html
