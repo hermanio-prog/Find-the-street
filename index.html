@@ -121,6 +121,35 @@
             letter-spacing: -0.5px;
         }
 
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            resize: none;
+            min-height: 120px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            margin-top: 10px;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #5a6268, #343a40);
+        }
+
+        .thank-you-message {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
         @media (max-width: 480px) {
             h1 {
                 font-size: 2rem;
@@ -136,6 +165,7 @@
     </style>
 </head>
 <body>
+    <!-- Tela inicial -->
     <div class="container" id="welcome-screen">
         <h1>FIND THE HOLE</h1>
         <div class="logo-subtext">NAVEGAÇÃO INTELIGENTE</div>
@@ -143,6 +173,7 @@
         <button onclick="showQuestion()">COMEÇAR</button>
     </div>
     
+    <!-- Tela de localização -->
     <div class="container options" id="location-screen">
         <h2>SUA LOCALIZAÇÃO</h2>
         <button onclick="showOptions('Maputo')">MAPUTO</button>
@@ -151,15 +182,43 @@
         <button onclick="showOptions('Outros')">OUTRAS REGIÕES</button>
     </div>
     
+    <!-- Tela de opções principais -->
     <div class="container options" id="options-screen">
         <h2>OPÇÕES</h2>
-        <button onclick="alert('Opção selecionada: Relatar problemas')">REPORTAR PROBLEMA</button>
-        <button onclick="alert('Opção selecionada: Procurar vias alternativas')">ROTAS ALTERNATIVAS</button>
-        <button onclick="alert('Opção selecionada: Indicar estradas seguras')">VIAS SEGURAS</button>
+        <button onclick="showReportProblem()">REPORTAR PROBLEMA</button>
+        <button onclick="showAlternativeRoutes()">ROTAS ALTERNATIVAS</button>
+        <button onclick="openGoogleMaps()">VIAS SEGURAS</button>
         <button onclick="alert('Opção selecionada: Informações')">SAIBA MAIS</button>
     </div>
     
+    <!-- Tela de reportar problema -->
+    <div class="container options" id="report-screen">
+        <h2>REPORTAR PROBLEMA</h2>
+        <p>Descreva o problema encontrado na via:</p>
+        <textarea id="problem-description" placeholder="Ex: Buraco grande na Avenida 24 de Julho, próximo ao semáforo..."></textarea>
+        <button onclick="submitProblem()">ENVIAR RELATO</button>
+        <button class="back-btn" onclick="backToOptions()">VOLTAR</button>
+    </div>
+    
+    <!-- Tela de confirmação -->
+    <div class="container options" id="thank-you-screen">
+        <h2>OBRIGADO!</h2>
+        <p class="thank-you-message">Seu relato foi enviado com sucesso!</p>
+        <p>Agradecemos por contribuir para estradas mais seguras.</p>
+        <button onclick="backToOptions()">VOLTAR AO INÍCIO</button>
+    </div>
+    
+    <!-- Tela de rotas alternativas -->
+    <div class="container options" id="routes-screen">
+        <h2>ROTAS ALTERNATIVAS</h2>
+        <button onclick="showUnderDevelopment()">CAMINHOS RÁPIDOS</button>
+        <button onclick="showUnderDevelopment()">SEM CONGESTIONAMENTOS</button>
+        <button onclick="showUnderDevelopment()">RUAS URBANAS</button>
+        <button class="back-btn" onclick="backToOptions()">VOLTAR</button>
+    </div>
+    
     <script>
+        // Funções de navegação básica
         function showQuestion() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('location-screen').style.display = 'block';
@@ -168,7 +227,56 @@
         function showOptions(location) {
             document.getElementById('location-screen').style.display = 'none';
             document.getElementById('options-screen').style.display = 'block';
-            alert('Região selecionada: ' + location);
+        }
+        
+        function backToOptions() {
+            hideAllScreens();
+            document.getElementById('options-screen').style.display = 'block';
+        }
+        
+        // Funções para reportar problema
+        function showReportProblem() {
+            hideAllScreens();
+            document.getElementById('report-screen').style.display = 'block';
+        }
+        
+        function submitProblem() {
+            const description = document.getElementById('problem-description').value;
+            if (description.trim() === '') {
+                alert('Por favor, descreva o problema antes de enviar.');
+                return;
+            }
+            
+            // Aqui você normalmente enviaria os dados para um servidor
+            console.log('Problema reportado:', description);
+            
+            hideAllScreens();
+            document.getElementById('thank-you-screen').style.display = 'block';
+            document.getElementById('problem-description').value = ''; // Limpa o campo
+        }
+        
+        // Funções para rotas alternativas
+        function showAlternativeRoutes() {
+            hideAllScreens();
+            document.getElementById('routes-screen').style.display = 'block';
+        }
+        
+        function showUnderDevelopment() {
+            alert('Esta funcionalidade está em desenvolvimento. Em breve teremos novidades!');
+        }
+        
+        // Função para abrir Google Maps
+        function openGoogleMaps() {
+            // Substitua pelas coordenadas ou parâmetros que desejar
+            window.open('https://www.google.com/maps', '_blank');
+        }
+        
+        // Função utilitária para esconder todas as telas
+        function hideAllScreens() {
+            const screens = document.querySelectorAll('.options, #welcome-screen');
+            screens.forEach(screen => {
+                screen.style.display = 'none';
+            });
         }
     </script>
 </body>
